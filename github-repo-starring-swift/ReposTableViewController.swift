@@ -40,5 +40,13 @@ class ReposTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedRepo = store.repositories[indexPath.row]
+        
+        GithubAPIClient().toggleStarStatusForRepository(selectedRepo) {
+            self.tableView.reloadData()
+        }
+    }
 
 }
